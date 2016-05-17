@@ -14,27 +14,6 @@ import base64
 import shutil
 import ssl
 
-mydnsip = '127.0.0.1'
-mydnsport = '7913'
-# Extra Domain;
-EX_DOMAIN=[ \
-'.google.com', \
-'.google.com.hk', \
-'.google.com.tw', \
-'.google.com.sg', \
-'.google.co.jp', \
-'.google.co.kr', \
-'.blogspot.com', \
-'.blogspot.sg', \
-'.blogspot.hk', \
-'.blogspot.jp', \
-'.blogspot.kr', \
-'.gvt1.com', \
-'.gvt2.com', \
-'.gvt3.com', \
-'.1e100.net', \
-'.blogspot.tw' \
-]
 
 # the url of gfwlist
 baseurl = 'https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt'
@@ -48,7 +27,7 @@ outfile = '/tmp/dnsmasq_list.conf'
 rulesfile = './dnsmasq_list.conf'
 
 fs =  file(outfile, 'w')
-fs.write('# gfw list ipset rules for dnsmasq\n')
+fs.write('# gfw list ipset rules for surge\n')
 fs.write('# updated on ' + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '\n')
 fs.write('#\n')
 
@@ -91,10 +70,6 @@ for line in tfs.readlines():
 
 tfs.close()
 
-for each in EX_DOMAIN:
-	fs.write('DOMAIN-SUFFIX,%s,Proxy'%(each))
-
-print 'write extra domain done'
 
 fs.close();
 print 'moving generated file to dnsmasg directory'
